@@ -16,4 +16,27 @@ jobs:
               run: npm install
               
             - name: run tests
-              run: npm test  
+              run: npm test 
+              
+    deploy:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Clone Repositry
+              uses: actions/checkout@v4
+
+            - name: install node
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20
+
+            - name: install_dependencies
+              run: npm install
+            
+            - name: build project
+              run: npm run build
+              
+            - name: Deploy
+              run: echo "Deploy Successfully!"
+
+
